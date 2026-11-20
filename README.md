@@ -1,21 +1,24 @@
-# instrumen-masw
+# instrumen-praktik-masw
 
-Mesin dokumen **Instrumen Ujian Praktik Asesmen Madrasah** untuk Madrasah Aliyah Syubbanul Wathon, Tegalrejo. File ini dipakai oleh skill Gemini `instrumen-ujian-praktik-umum-masw` dan `instrumen-ujian-praktik-pai-arab-masw`.
+Mesin dokumen **Instrumen Ujian Praktik Asesmen Madrasah** untuk Madrasah Aliyah Syubbanul Wathon, Tegalrejo. Mesin ini dipakai oleh skill Gemini `instrumen-ujian-praktik-umum-masw` dan `instrumen-ujian-praktik-pai-arab-masw`.
 
-Gemini cukup menulis **isi dokumen** (konfigurasi guru, CP, TP, kisi-kisi, LKPD, kartu soal, rubrik). Tampilan A4, toolbar, ekspor Word (.docx), cetak PDF, kop, dan pemeriksaan otomatis disediakan oleh mesin di repo ini. Hasilnya, dokumen dibuat lebih cepat dan fiturnya tidak bisa hilang.
+Gemini cukup menulis **data isi** (`window.INSTRUMEN` berisi konfig, isi, dan siswa, sekitar 10 KB). Mesin di repo ini merender 9 komponen A4, toolbar 4 menu (Unggah Cover, Unggah Kop, Unduh Word .docx, Unduh PDF tanpa dialog cetak), kop otomatis, serta pemeriksaan otomatis (data siswa diverifikasi dengan hash, level C3–C6, integrasi KBC SK Dirjen Pendis 6077/2025, dan halaman yang melebihi A4).
 
 ## Isi repo
 
 | Path | Fungsi |
 |---|---|
-| `assets/kop-masw.png` | Kop resmi madrasah (versi ringan, 1000 px) |
-| `uji/uji-canvas.js` | Skrip uji kelayakan Canvas Gemini |
-| `uji/halaman-uji.html` | Halaman yang ditempel ke Canvas untuk pengujian |
-| `mesin/` | *(tahap berikutnya)* mesin instrumen versi 2.2 |
+| `mesin/mesin-instrumen.js` | Mesin v2.2.0 |
+| `assets/kop-masw.png` | Kop resmi madrasah (1000 px) yang dimuat mesin |
+| `uji/` | Alat uji kelayakan Canvas |
 
-## Ketentuan penting
+## Alamat mesin yang dipakai skill
 
-- Repo ini **Public**, karena jsDelivr hanya bisa membaca repo publik.
-- **DILARANG menaruh data pribadi** (nama, NIS, NISN siswa, atau data guru) di repo ini. Data siswa tetap disimpan di dalam skill Gemini dan disisipkan ke dokumen saat dibuat.
-- Setiap rilis mesin diberi tag versi (misalnya `v2.2.0`), dan skill memanggil versi yang dikunci, misalnya `https://cdn.jsdelivr.net/gh/<akun>/instrumen-masw@v2.2.0/mesin/mesin-instrumen.js`. Dengan begitu, perubahan di repo tidak tiba-tiba mengubah dokumen guru.
-- Hanya pengelola (Kepala Madrasah/tim TI) yang boleh punya akses tulis ke repo.
+- Utama (versi dikunci): `https://cdn.jsdelivr.net/gh/muflihan-ak/instrumen-praktik-masw@v2.2.0/mesin/mesin-instrumen.js`
+- Cadangan (GitHub Pages): `https://muflihan-ak.github.io/instrumen-praktik-masw/mesin/mesin-instrumen.js`
+
+## Ketentuan
+
+- Repo **Public**. **DILARANG** menaruh data pribadi (nama, NIS, NISN siswa, atau data guru) di repo ini. Mesin hanya menyimpan jumlah siswa dan hash per rombel untuk verifikasi.
+- Setiap perubahan mesin dirilis dengan **tag versi baru** (misalnya `v2.2.1`), lalu alamat di skill diperbarui. Tag yang sudah dirilis jangan diubah, agar dokumen lama tetap stabil.
+- Hanya pengelola (Kepala Madrasah/tim TI) yang boleh punya akses tulis.
