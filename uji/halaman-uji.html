@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Uji Canvas — Mesin Instrumen MASW</title>
+</head>
+<body style="background:#eef2ef;margin:0;padding:12px">
+<div id="status-muat" style="font-family:Arial,sans-serif;max-width:640px;margin:0 auto;padding:10px 14px;border-radius:8px;background:#fff8d6;color:#5a4500;font-size:14px">
+  Memuat skrip eksternal…
+</div>
+<script>
+  /* GANTI satu baris ini dengan nama akun GitHub Bapak (huruf kecil, tanpa @) */
+  const AKUN = "GANTI_DENGAN_AKUN_GITHUB";
+  const REPO = "instrumen-masw";
+  const SUMBER = [
+    "https://cdn.jsdelivr.net/gh/" + AKUN + "/" + REPO + "@main/uji/uji-canvas.js",
+    "https://" + AKUN + ".github.io/" + REPO + "/uji/uji-canvas.js"
+  ];
+  const st = document.getElementById("status-muat");
+  const log = [];
+  (function coba(i) {
+    if (i >= SUMBER.length) {
+      st.style.background = "#fde2e2"; st.style.color = "#8b0000";
+      st.innerHTML = "<b>✘ Skrip eksternal tidak bisa dimuat.</b><br>" + log.join("<br>") +
+        "<br>Kemungkinan: nama AKUN belum diganti, repo belum Public, file belum diunggah, atau Canvas memblokir skrip dari luar.";
+      return;
+    }
+    const s = document.createElement("script");
+    s.src = SUMBER[i];
+    s.onload = () => { st.style.background = "#dff3e5"; st.style.color = "#0b6b3a"; st.innerHTML = "✔ Termuat dari: " + SUMBER[i] + (log.length ? "<br><small>" + log.join("<br>") + "</small>" : ""); };
+    s.onerror = () => { log.push("Gagal: " + SUMBER[i]); coba(i + 1); };
+    document.head.appendChild(s);
+  })(0);
+</script>
+</body>
+</html>
